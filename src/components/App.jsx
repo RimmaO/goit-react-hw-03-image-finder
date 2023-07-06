@@ -1,16 +1,25 @@
-export const App = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
-  );
-};
+import { Component } from 'react';
+import { Toaster } from 'react-hot-toast';
+
+import Searchbar from './Searchbar/Searchbar';
+import SearchInfo from './SearchInfo/SearchInfo';
+import ImageGallery from './ImageGallery/ImageGallery';
+
+export class App extends Component {
+  state = { searchText: '', images: [] };
+
+  handleSearch = searchText => {
+    this.setState({ searchText });
+  };
+
+  render() {
+    return (
+      <>
+        <Toaster />
+        <Searchbar handleSearch={this.handleSearch} />
+        <SearchInfo searchText={this.state.searchText} />
+        <ImageGallery images={this.state.images} />
+      </>
+    );
+  }
+}
