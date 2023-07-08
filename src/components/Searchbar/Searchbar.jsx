@@ -1,33 +1,38 @@
+import PropTypes from 'prop-types';
+
 import { Component } from 'react';
 import { toast } from 'react-hot-toast';
+import { Button, Form, Header, Input, Span } from './Searchbar.styled';
+import { BiSearchAlt } from 'react-icons/bi';
 
 class Searchbar extends Component {
-  state = { value: '' }; // value - те що вводимо в input
+  state = { valueInput: '' }; // value - те що вводимо в input
 
   handleChange = event => {
-    this.setState({ value: event.target.value.toLowerCase() }); //БЕЗ деструктиризації
+    this.setState({ valueInput: event.target.value.toLowerCase() });
   };
 
   handleSubmit = event => {
     event.preventDefault();
 
-    if (this.state.value.trim() === '') {
+    if (this.state.valueInput.trim() === '') {
       return toast.error('Input is empty');
     }
-
-    this.props.handleSearch(this.state.value);
+    const query = event.target.elements.value;
+    this.props.onSubmit(query);
     this.setState({ value: '' });
   };
 
   render() {
     return (
-      <header className="searchbar" onSubmit={this.handleSubmit}>
-        <form className="form">
-          <button type="submit" className="button">
-            <span className="button-label">Search</span>
-          </button>
+      <Header className="searchbar">
+        <Form className="form" onSubmit={this.handleSubmit}>
+          <Button width="48" height="48" type="submit" className="button">
+            <BiSearchAlt size="36" />
+            <Span className="button-label">Search</Span>
+          </Button>
 
-          <input
+          <Input
             className="input"
             type="text"
             autoComplete="off"
@@ -36,10 +41,12 @@ class Searchbar extends Component {
             onChange={this.handleChange}
             value={this.state.value}
           />
-        </form>
-      </header>
+        </Form>
+      </Header>
     );
   }
 }
 
 export default Searchbar;
+
+Searchbar.propTypes = { onSubmit: PropTypes.func.isRequired };
