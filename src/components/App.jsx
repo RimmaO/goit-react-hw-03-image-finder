@@ -1,6 +1,7 @@
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
+import Loader from './Loader/Loader';
 
 import { toast } from 'react-toastify';
 
@@ -8,7 +9,6 @@ import { Component } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { Wrap } from './App.styled';
 import { getImages } from './Services/API';
-import Loader from './Loader/Loader';
 
 export class App extends Component {
   state = {
@@ -29,8 +29,8 @@ export class App extends Component {
     }
   }
 
-  handleSearch = searchText => {
-    this.setState({ searchText });
+  handleSearch = query => {
+    this.setState({ searchText: query, images: [], currentPage: 1 });
   };
 
   loadMore = () => {
@@ -48,7 +48,7 @@ export class App extends Component {
       }
 
       this.setState(state => ({
-        images: [...state.images],
+        images: [...state.images, ...data.hits],
         isLoading: false,
         error: '',
       }));

@@ -14,20 +14,22 @@ class ImageGalleryItem extends Component {
 
   render() {
     return (
-      <Item className="gallery-item">
-        <Image
-          src={this.props.image.webformatURL}
-          alt={this.props.image.tags}
-          onClick={this.toggleModal}
-        />
-        {this.state.showModal && ( // If showModal === true, show Modal
-          <Modal
-            largeImageURL={this.props.image.largeImageURL} // URL
-            tags={this.props.image.tags} // tag
-            onClose={this.toggleModal} // func for change state of modal
+      <>
+        <Item className="gallery-item">
+          <Image
+            src={this.props.image.webformatURL}
+            alt={this.props.image.tags}
+            onClick={this.toggleModal}
           />
-        )}
-      </Item>
+          {this.state.showModal && ( // If showModal === true, show Modal
+            <Modal
+              largeImageURL={this.props.image.largeImageURL} // URL
+              tags={this.props.image.tags} // tag
+              onClose={this.toggleModal} // func for change state of modal
+            />
+          )}
+        </Item>
+      </>
     );
   }
 }

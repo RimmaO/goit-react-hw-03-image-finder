@@ -6,19 +6,19 @@ import { Button, Form, Header, Input, Span } from './Searchbar.styled';
 import { BiSearchAlt } from 'react-icons/bi';
 
 class Searchbar extends Component {
-  state = { valueInput: '' }; // value - те що вводимо в input
+  state = { value: '' }; // value - те що вводимо в input
 
   handleChange = event => {
-    this.setState({ valueInput: event.target.value.toLowerCase() });
+    this.setState({ value: event.target.value });
   };
 
   handleSubmit = event => {
     event.preventDefault();
 
-    if (this.state.valueInput.trim() === '') {
+    if (this.state.value.trim() === '') {
       return toast.error('Input is empty');
     }
-    const query = event.target.elements.value;
+    const query = this.state.value.toLowerCase();
     this.props.onSubmit(query);
     this.setState({ value: '' });
   };
@@ -35,6 +35,7 @@ class Searchbar extends Component {
           <Input
             className="input"
             type="text"
+            id="search"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
