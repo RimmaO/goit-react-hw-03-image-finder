@@ -3,10 +3,8 @@ import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import Loader from './Loader/Loader';
 
-import { toast } from 'react-toastify';
-
 import { Component } from 'react';
-import { Toaster } from 'react-hot-toast';
+import { Toaster, toast } from 'react-hot-toast';
 import { Wrap } from './App.styled';
 import { getImages } from './Services/API';
 
@@ -20,7 +18,6 @@ export class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.state);
     if (
       prevState.searchText !== this.state.searchText ||
       prevState.currentPage !== this.state.currentPage
