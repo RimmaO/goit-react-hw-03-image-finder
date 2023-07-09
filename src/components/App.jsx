@@ -27,7 +27,14 @@ export class App extends Component {
   }
 
   handleSearch = query => {
-    this.setState({ searchText: query, images: [], currentPage: 1 });
+    if (this.state.searchText === query) {
+      return toast.error(`Sorry,  you just looked ${query}`);
+    }
+    this.setState({
+      searchText: query.toLowerCase(),
+      images: [],
+      currentPage: 1,
+    });
   };
 
   loadMore = () => {
@@ -50,11 +57,9 @@ export class App extends Component {
 
       this.setState(state => ({
         images: [...state.images, ...data.hits],
-        isLoading: false,
-        error: '',
       }));
     } catch (error) {
-      this.setState({ error: 'Something wrong!' });
+      this.setState({ error: 'Something went wrong!' });
     } finally {
       this.setState({ isLoading: false });
     }

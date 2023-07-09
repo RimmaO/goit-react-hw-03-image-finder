@@ -20,7 +20,6 @@ class Searchbar extends Component {
     }
     const query = this.state.value.toLowerCase();
     this.props.onSubmit(query);
-    this.setState({ value: '' });
   };
 
   render() {
