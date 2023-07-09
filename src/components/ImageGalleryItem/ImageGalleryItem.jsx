@@ -15,7 +15,7 @@ class ImageGalleryItem extends Component {
   render() {
     return (
       <>
-        <Item className="gallery-item">
+        <Item key={this.props.image.id} className="gallery-item">
           <Image
             src={this.props.image.webformatURL}
             alt={this.props.image.tags}

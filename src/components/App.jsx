@@ -42,7 +42,11 @@ export class App extends Component {
   addImages = async () => {
     try {
       this.setState({ isLoading: true });
-      const data = await getImages(this.state.searchText);
+      const data = await getImages(
+        this.state.searchText,
+        this.state.currentPage
+      );
+
       if (data.hits.length === 0) {
         return toast.error('Sorry, image not found');
       }
